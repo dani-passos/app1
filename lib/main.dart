@@ -5,25 +5,24 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
- 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.cyan),
-        useMaterial3: true,
+        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.cyan),
+        // useMaterial3: true, // Comentado para compatibilidade com versões anteriores
       ),
-      home: const MyHomePage(title: 'Meu Primeiro App em Flutter',),
+      home: const MyHomePage(title: 'Meu Primeiro App em Flutter'),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+  const MyHomePage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
@@ -36,45 +35,40 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _incrementCounter() {
     setState(() {
-   
       _counter++;
     });
   }
 
   @override
   Widget build(BuildContext context) {
- 
     return Scaffold(
       appBar: AppBar(
-     
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-      
-        title: Text(widget.title),
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        title: Center(
+          child: Text(
+            widget.title,
+            style: TextStyle(color: Colors.white), // Cor da letra branca
+          ),
+        ),
       ),
       body: Center(
-       
         child: Column(
-      
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const Text(
               'Contador:',
-              style: TextStyle( color:Colors.pink, fontSize:50),
-              
+              style: TextStyle(color: Colors.pink, fontSize: 50),
             ),
-          
             Text(
               '$_counter',
-              style: TextStyle(fontSize:40, color:Colors.pink)
-              
-              
+              style: TextStyle(fontSize: 40, color: Colors.deepOrange),
             ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
-        tooltip: 'Increment',
+        tooltip: 'Incrementar',
         child: const Icon(Icons.add),
       ),
     );
